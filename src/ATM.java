@@ -17,8 +17,8 @@ public class ATM {
 		
 		Scanner scanner = new Scanner(System.in);
 		
-		String IbanMG="TR12 3456 7890 1234 5678 9012 3456";
-		String ibanAG="TR12 3456 7890 1234 5678 9012 2109";
+		String IbanMG="12345678901234567890123456";
+		String ibanAG="12345678901234567890122109";
 		
 		int bakiyeMG=30000;
 		int bakiyeAG=30000;
@@ -73,20 +73,22 @@ public class ATM {
 			    System.out.println("Mevcut Bakiyeniz: " + bakiye);
 			    break;
 			case "3":
-				System.out.print("Lütfen gönderilecek IBAN'ı giriniz: ");
+				System.out.print("Lütfen gönderilecek IBAN'ı giriniz: TR");
 				String yatirilacakIban=scanner.nextLine();
 				
 				if (yatirilacakIban.length()!=26) {
 					System.out.println("Hatalı IBAN Adresi!!!\nTekrar Deneyiniz");
-				} else if(yatirilacakIban==ibanAG) {
+				} else if(yatirilacakIban.equals(ibanAG)) {
 					System.out.print(kullaniciAdiAG+" isimli kişiye göndermek istediğiniz miktarı giriniz: ");
 					int gonderilen=scanner.nextInt();
 					bakiye-=gonderilen;
 					bakiyeAG+=gonderilen;
+					bakiyeMG=Integer.valueOf(bakiye);
 				}else {
-					System.out.println("Lütfen göndermek istediğiniz miktarı giriniz: ");
+					System.out.print("Lütfen göndermek istediğiniz miktarı giriniz: ");
 					int gonderilen=scanner.nextInt();
 					bakiye-=gonderilen;
+					bakiyeMG=Integer.valueOf(bakiye);
 				}
 				
 				System.out.println("Mevcut Bakiyeniz: "+ bakiyeMG);
