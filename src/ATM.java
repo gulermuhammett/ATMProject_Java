@@ -31,6 +31,9 @@ public class ATM {
 		
 		String iban=null;
 		double bakiye=-1;
+		String secim="secim";
+		
+		
 
 		System.out.println("ATM'ye Hoşgeldiniz");
 		System.out.print("Kullanıcı Adı Giriniz: ");
@@ -49,13 +52,16 @@ public class ATM {
 		} else {
 			System.out.println("Kullanıcı Adı veya Parola Hatalı Lütfen Tekrar Giriş Yapınız!!!");
 		}
+		do {
+			
+		
 		if (iban!=null && bakiye!=-1) {
 			System.out.println("Bakiye görüntülemek için 		 --> 1");
 			System.out.println("Para Çekmek için 		         --> 2");
 			System.out.println("Farklı hesaba para yatırmak için --> 3");
 			System.out.println("Uygulamadan çıkmak için		     --> q");
 			System.out.print("Seçiminiz: ");
-			String secim = scanner.nextLine();
+			secim = scanner.nextLine();
 			
 			switch (secim) {
 			case "1":
@@ -112,6 +118,7 @@ public class ATM {
 				break;
 			}
 		} 
+		} while (secim!="q");
 		
 	}
 
