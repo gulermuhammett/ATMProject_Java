@@ -20,8 +20,8 @@ public class ATM {
 		String IbanMG="12345678901234567890123456";
 		String ibanAG="12345678901234567890122109";
 		
-		int bakiyeMG=30000;
-		int bakiyeAG=30000;
+		double bakiyeMG=30000;
+		double bakiyeAG=30000;
 		
 		String kullaniciAdiMG="muhammet";
 		String kullaniciAdiAG="ahmet";
@@ -30,7 +30,7 @@ public class ATM {
 		String kullaniciSifreAG="4321";
 		
 		String iban=null;
-		Integer bakiye=null;
+		double bakiye=-1;
 
 		System.out.println("ATM'ye Hoşgeldiniz");
 		System.out.print("Kullanıcı Adı Giriniz: ");
@@ -49,14 +49,13 @@ public class ATM {
 		} else {
 			System.out.println("Kullanıcı Adı veya Parola Hatalı Lütfen Tekrar Giriş Yapınız!!!");
 		}
-		if (iban!=null && bakiye!=null) {
+		if (iban!=null && bakiye!=-1) {
 			System.out.println("Bakiye görüntülemek için 		 --> 1");
 			System.out.println("Para Çekmek için 		         --> 2");
 			System.out.println("Farklı hesaba para yatırmak için --> 3");
 			System.out.println("Uygulamadan çıkmak için		     --> q");
 			System.out.print("Seçiminiz: ");
 			String secim = scanner.nextLine();
-			
 			
 			switch (secim) {
 			case "1":
@@ -78,20 +77,31 @@ public class ATM {
 				
 				if (yatirilacakIban.length()!=26) {
 					System.out.println("Hatalı IBAN Adresi!!!\nTekrar Deneyiniz");
-				} else if(yatirilacakIban.equals(ibanAG)) {
+				} else if((iban.equals(yatirilacakIban))) {
+					System.out.println("Aynı hesaba para transferi gerçekleştiremezsiniz!");				
+				}
+				else if(yatirilacakIban.equals(ibanAG)) {
 					System.out.print(kullaniciAdiAG+" isimli kişiye göndermek istediğiniz miktarı giriniz: ");
 					int gonderilen=scanner.nextInt();
 					bakiye-=gonderilen;
 					bakiyeAG+=gonderilen;
-					bakiyeMG=Integer.valueOf(bakiye);
-				}else {
+					bakiyeMG=bakiye;
+				}
+				else if(yatirilacakIban.equals(IbanMG)) {
+					System.out.print(kullaniciAdiAG+" isimli kişiye göndermek istediğiniz miktarı giriniz: ");
+					int gonderilen=scanner.nextInt();
+					bakiye-=gonderilen;
+					bakiyeMG+=gonderilen;
+					bakiyeAG=bakiye;
+				}
+				else {
 					System.out.print("Lütfen göndermek istediğiniz miktarı giriniz: ");
 					int gonderilen=scanner.nextInt();
 					bakiye-=gonderilen;
-					bakiyeMG=Integer.valueOf(bakiye);
+					bakiyeMG=bakiye;
 				}
 				
-				System.out.println("Mevcut Bakiyeniz: "+ bakiyeMG);
+				System.out.println("Para Transferi başarıyla gerçekleşti.\nMevcut Bakiyeniz: "+ bakiyeMG);
 				break;
 			case "q":
 				System.out.print("Çıkış işleminiz başarıyla gerçekleşti!!! ");
@@ -101,9 +111,7 @@ public class ATM {
 				System.out.println("Lütfen sadece belirtilen seçenekleri tuşlayınız");
 				break;
 			}
-		} else {
-
-		}
+		} 
 		
 	}
 
